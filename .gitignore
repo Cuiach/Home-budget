@@ -1,0 +1,6 @@
+bin/
+obj/
+plan/
+*.xml
+2023*
+
