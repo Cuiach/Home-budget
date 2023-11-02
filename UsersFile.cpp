@@ -67,7 +67,6 @@ vector <User> UsersFile::readUsersFromFile()
 {
     User user;
     vector <User> users;
-    string tempId, tempLogin, tempPasswd, tempName, tempLastName;
 
     CMarkup xml;
 
@@ -98,9 +97,9 @@ vector <User> UsersFile::readUsersFromFile()
 
 void UsersFile::addUserToFile(User user)
 {
-    string lineWithUserDetails = "";
-    fstream dataFile;
-    dataFile.open(getFileName().c_str(), ios::app);
+//    string lineWithUserDetails = "";
+//    fstream dataFile;
+//    dataFile.open(getFileName().c_str(), ios::app);
         CMarkup xml;
 
     if (!xml.Load("Users.xml"))
@@ -122,7 +121,6 @@ void UsersFile::addUserToFile(User user)
     xml.AddElem("name", user.getName());
     xml.AddElem("lastName", user.getLastName());
 
-// is it needed? = to check    xml.OutOfElem();
     xml.Save("Users.xml");
 }
 

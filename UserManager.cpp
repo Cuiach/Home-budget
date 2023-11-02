@@ -6,20 +6,14 @@ int UserManager::getIdOfLoggedUser(){
 
 bool UserManager::isUserLoggedIn(){
     if (idOfLoggedUser > 0)
-    {
         return true;
-    }
     else
-    {
         return false;
-    }
 }
 
 void UserManager::changePasswordOfLoggedUser(){
     if (idOfLoggedUser == 0)
-    {
         return;
-    }
 
     string newPassword = "";
     cout << "Podaj nowe haslo: ";

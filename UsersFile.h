@@ -10,7 +10,6 @@
 #include "AdditionalMethods.h"
 #include "DataFile.h"
 
-
 using namespace std;
 
 class UsersFile :public DataFile::DataFile

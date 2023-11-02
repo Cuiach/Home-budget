@@ -7,6 +7,8 @@
 
 #include "BudgetApp.h"
 
+#include "AdditionalMethods.h"
+
 using namespace std;
 
 //#include <iomanip>
@@ -14,7 +16,7 @@ using namespace std;
 
 int main()
 {
-BudgetApp budgetApp("Uzytkownicy.txt");
+BudgetApp budgetApp("Users.xml");
 char choice;
 
 while (true)
@@ -40,9 +42,9 @@ while (true)
 
         switch (choice)
         {
-//        case '1': budgetApp.dodajAdresata(); break;
-//        case '2': budgetApp.(); break;
-//        case '3': budgetApp.(); break;
+        case '1': budgetApp.addIncome(); break;
+        case '2': budgetApp.addOutcome(); break;
+        case '3': budgetApp.printInOut(); break;
 //        case '4': budgetApp.(); break;
 //        case '5': budgetApp.(); break;
         case '6': budgetApp.changePassword(); break;
