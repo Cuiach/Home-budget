@@ -44,7 +44,7 @@ while (true)
         {
         case '1': budgetApp.addIncome(); break;
         case '2': budgetApp.addOutcome(); break;
-        case '3': budgetApp.printInOut(); break;
+        case '3': budgetApp.printThisMonthInOut(); break;
         case '4': budgetApp.printLastMonthInOut(); break;
 //        case '5': budgetApp.(); break;
         case '6': budgetApp.changePassword(); break;

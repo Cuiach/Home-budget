@@ -24,6 +24,15 @@ int BudgetApp::getLastDayOfMonth(int year, int month)
     return lastDayOfMonth;
 }
 
+int BudgetApp::getCurrentYearMonth()
+{
+    time_t temporaryTime = time(nullptr);
+    tm *const timeToGetYearAndMonth = localtime(&temporaryTime);
+    int year = 1900 + timeToGetYearAndMonth->tm_year;
+    int month = timeToGetYearAndMonth->tm_mon + 1;
+    return year*100 + month;
+}
+
 void BudgetApp::addOutcome()
 {
     flowManager->addOutcome();
@@ -34,14 +43,26 @@ void BudgetApp::addIncome()
     flowManager->addIncome();
 }
 
+void BudgetApp::printThisMonthInOut()
+{
+    int dateFrom = 0;
+    int dateTo = 0;
+    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(0,4)));
+    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(4,2)));
+
+    dateFrom = year*10000 + (month)*100 + 1;
+    dateTo = year*10000 + (month)*100 + getLastDayOfMonth(year, month);
+
+    flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
+}
+
 void BudgetApp::printLastMonthInOut()
 {
     int dateFrom = 0;
     int dateTo = 0;
-    time_t temporaryTime = time(nullptr);
-    tm *const timeToGetYearAndMonth = localtime(&temporaryTime);
-    int year = 1900 + timeToGetYearAndMonth->tm_year;
-    int month = timeToGetYearAndMonth->tm_mon + 1;
+    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(0,4)));
+    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(4,2)));
+
     if (month != 1)
     {
 
@@ -76,7 +97,6 @@ void BudgetApp::logIn()
     userManager.logUserIn();
     if (userManager.isUserLoggedIn())
     {
-/*usunac*/        int testIntIdLoggedUser = userManager.getIdOfLoggedUser();
         flowManager = new FlowManager(userManager.getIdOfLoggedUser());
     }
 }

@@ -15,6 +15,7 @@ class BudgetApp
     FlowManager *flowManager;
 
     int getLastDayOfMonth(int year, int month);
+    int getCurrentYearMonth();
 
 public:
     BudgetApp(string nameOfUsersFile) : userManager(nameOfUsersFile)  {
@@ -24,6 +25,7 @@ public:
     };
     void addOutcome();
     void addIncome();
+    void printThisMonthInOut();
     void printLastMonthInOut();
     void printInOut();
     void registerUser();
