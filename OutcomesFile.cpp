@@ -1,5 +1,10 @@
 #include "OutcomesFile.h"
 
+int OutcomesFile::getLastItemId()
+{
+    return lastOutcomeId;
+}
+
 void OutcomesFile::addOutcomeToFile(Operation outcome)
 {
     outcome.setOperationId(lastOutcomeId+1);

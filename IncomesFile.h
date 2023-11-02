@@ -18,7 +18,7 @@ class IncomesFile //:public OperationsFile::OperationsFile
 
 public:
 //    IncomesFile(string incomesFileName) : DataFile(incomesFileName) {};
-
+    int getLastItemId();
     void addIncomeToFile(Operation income);
     vector <Operation> readIncomesFromFile(int idOfLoggedUser);
 //    void readIncomesFromFile(int dateFrom, dateTo);

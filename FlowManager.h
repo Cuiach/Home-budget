@@ -21,12 +21,13 @@ class FlowManager
 public:
     FlowManager (int idOfLoggedUser) : ID_OF_LOGGED_USER(idOfLoggedUser)
     {
-        incomes = incomesFile.readIncomesFromFile(ID_OF_LOGGED_USER);
         outcomes = outcomesFile.readOutcomesFromFile(ID_OF_LOGGED_USER);
+        incomes = incomesFile.readIncomesFromFile(ID_OF_LOGGED_USER);
     };
 
     void addOutcome();
     void addIncome();
+    void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
     void printAllIncomesAndOutcomes();
 };
 

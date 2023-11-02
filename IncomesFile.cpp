@@ -1,5 +1,10 @@
 #include "IncomesFile.h"
 
+int IncomesFile::getLastItemId()
+{
+    return lastItemId;
+}
+
 void IncomesFile::addIncomeToFile(Operation income)
 {
     income.setOperationId(lastItemId+1);

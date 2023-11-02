@@ -2,6 +2,7 @@
 #define BUDGETAPP_H
 
 #include <iostream>
+#include <ctime>
 
 #include "UserManager.h"
 #include "FlowManager.h"
@@ -13,6 +14,8 @@ class BudgetApp
     UserManager userManager;
     FlowManager *flowManager;
 
+    int getLastDayOfMonth(int year, int month);
+
 public:
     BudgetApp(string nameOfUsersFile) : userManager(nameOfUsersFile)  {
         flowManager = NULL;
@@ -21,9 +24,9 @@ public:
     };
     void addOutcome();
     void addIncome();
+    void printLastMonthInOut();
     void printInOut();
     void registerUser();
-    void wypiszWszystkichUzytkownikow();
     void logIn();
     void logUserOut();
     void changePassword();

@@ -19,6 +19,7 @@ class OutcomesFile //:public OperationsFile::OperationsFile
 public:
 //    OutcomesFile(string outcomesFileName) : DataFile(outcomesFileName) {};
 
+    int getLastItemId();
     void addOutcomeToFile(Operation outcome);
     vector <Operation> readOutcomesFromFile(int idOfLoggedUser);
 //    void readOutcomesFromFile(int dateFrom, dateTo);
