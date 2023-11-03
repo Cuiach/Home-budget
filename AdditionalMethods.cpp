@@ -32,29 +32,11 @@ char AdditionalMethods::chooseOptionFromLoggedUserMenu()
     cout << "---------------------------" << endl;
     cout << "6. Zmien haslo" << endl;
     cout << "7. Wyloguj sie" << endl;
+    cout << "8. wszystkie in & out" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
     choice = readSign();
 
-
-    return choice;
-}
-
-char AdditionalMethods::chooseOptionFromEditMenu()
-{
-    char choice;
-
-    cout << endl << "   >>> MENU  EDYCJA <<<" << endl;
-    cout << "---------------------------" << endl;
-    cout << "Ktore dane zaktualizowac: " << endl;
-    cout << "1 - Imie" << endl;
-    cout << "2 - Nazwisko" << endl;
-    cout << "3 - Numer telefonu" << endl;
-    cout << "4 - Email" << endl;
-    cout << "5 - Adres" << endl;
-    cout << "6 - Powrot " << endl;
-    cout << endl << "Twoj wybor: ";
-    choice = readSign();
 
     return choice;
 }
@@ -153,9 +135,7 @@ int AdditionalMethods::getDateAndConvertToInt()
 
     cout << " Dzien: ";
     day = readInteger();
-    string dataTaka = convertIntToString(year) + "-" + convertIntToString(month) + "-" + convertIntToString(day);
-    cout << dataTaka;
-    cout << "AAA";
+
     while (!(
                 ((month == 1 || month == 3 || month == 5 || month == 7 ||
                 month == 8 || month == 10 || month == 12) && (day<=31 && day>=1))
@@ -183,27 +163,4 @@ string AdditionalMethods::changeFirstLetterCapitalNextSmall(string text)
     return text;
 }
 
-bool AdditionalMethods::isDateOneEarlierThanDateTwo(int date1, int date2)
-{
-    int year1 = convertStringToInt(convertIntToString(date1).substr(0,4));
-    int year2 = convertStringToInt(convertIntToString(date2).substr(0,4));
-    if (year1 < year2)
-        return true;
-    else if (year1 > year2)
-        return false;
-
-    int month1 = convertStringToInt(convertIntToString(date1).substr(4,2));
-    int month2 = convertStringToInt(convertIntToString(date2).substr(4,2));
-    if (month1 < month2)
-        return true;
-    else if (month1 > month2)
-        return false;
-
-    int day1 = convertStringToInt(convertIntToString(date1).substr(6,2));
-    int day2 = convertStringToInt(convertIntToString(date2).substr(6,2));
-    if (day1 < day2)
-        return true;
-//    else if (day1 > day2)
-    return false;
-}
 

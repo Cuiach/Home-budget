@@ -14,6 +14,5 @@ protected:
     DataFile(string fileName) : FILE_NAME(fileName) {}
 
     string getFileName();
-    bool isFileEmpty();
 };
 #endif

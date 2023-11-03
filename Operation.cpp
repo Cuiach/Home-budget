@@ -12,7 +12,7 @@ void Operation::setOperationuUserId(int newOperationUserId)
 
 void Operation::setOperationDate(int newOperationDate)
 {
-        operationDate = newOperationDate;
+    operationDate = newOperationDate;
 }
 
 void Operation::setOperationNameFromUser(string newOperationNameFromUser)

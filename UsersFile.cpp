@@ -30,39 +30,6 @@ void UsersFile::writeAllUsersInFile(vector <User> &users)
     xml.Save("Users.xml");
 }
 
-User UsersFile::getUserDetails(string userDetailsDividedByPipes)
-{
-    User user;
-    string singleDetailOfUser = "";
-    int singleUserDetailCount = 1;
-
-    for (size_t signPosition = 0; signPosition < userDetailsDividedByPipes.length(); signPosition++)
-    {
-        if (userDetailsDividedByPipes[signPosition] != '|')
-        {
-            singleDetailOfUser += userDetailsDividedByPipes[signPosition];
-        }
-        else
-        {
-            switch(singleUserDetailCount)
-            {
-            case 1:
-                user.setId(atoi(singleDetailOfUser.c_str()));
-                break;
-            case 2:
-                user.setLogin(singleDetailOfUser);
-                break;
-            case 3:
-                user.setPassword(singleDetailOfUser);
-                break;
-            }
-            singleDetailOfUser = "";
-            singleUserDetailCount++;
-        }
-    }
-    return user;
-}
-
 vector <User> UsersFile::readUsersFromFile()
 {
     User user;
@@ -97,10 +64,7 @@ vector <User> UsersFile::readUsersFromFile()
 
 void UsersFile::addUserToFile(User user)
 {
-//    string lineWithUserDetails = "";
-//    fstream dataFile;
-//    dataFile.open(getFileName().c_str(), ios::app);
-        CMarkup xml;
+    CMarkup xml;
 
     if (!xml.Load("Users.xml"))
     {
@@ -122,16 +86,4 @@ void UsersFile::addUserToFile(User user)
     xml.AddElem("lastName", user.getLastName());
 
     xml.Save("Users.xml");
-}
-
-string UsersFile::changeUserDetailsIntoLineOfDataDividedByPipes(User user)
-{
-    string lineWithUserDetails = "";
-    lineWithUserDetails += AdditionalMethods::convertIntToString(user.getId())+ '|';
-    lineWithUserDetails += user.getLogin() + '|';
-    lineWithUserDetails += user.getPassword() + '|';
-    lineWithUserDetails += user.getName() + '|';
-    lineWithUserDetails += user.getLastName() + '|';
-
-    return lineWithUserDetails;
 }

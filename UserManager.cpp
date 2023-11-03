@@ -1,17 +1,20 @@
 #include "UserManager.h"
 
-int UserManager::getIdOfLoggedUser(){
+int UserManager::getIdOfLoggedUser()
+{
     return idOfLoggedUser;
 }
 
-bool UserManager::isUserLoggedIn(){
+bool UserManager::isUserLoggedIn()
+{
     if (idOfLoggedUser > 0)
         return true;
     else
         return false;
 }
 
-void UserManager::changePasswordOfLoggedUser(){
+void UserManager::changePasswordOfLoggedUser()
+{
     if (idOfLoggedUser == 0)
         return;
 
@@ -33,7 +36,8 @@ void UserManager::changePasswordOfLoggedUser(){
     usersFile.writeAllUsersInFile(users);
 }
 
-int UserManager::logUserIn(){
+int UserManager::logUserIn()
+{
     string login = "", password = "";
 
     cout << endl << "Podaj login: ";
@@ -71,7 +75,8 @@ int UserManager::logUserIn(){
     return 0;
 }
 
-void UserManager::registerUser(){
+void UserManager::registerUser()
+{
     User user = putNewUserDetails();
 
     users.push_back(user);
@@ -81,7 +86,8 @@ void UserManager::registerUser(){
     system("pause");
 }
 
-User UserManager::putNewUserDetails(){
+User UserManager::putNewUserDetails()
+{
     User user;
 
     user.setId(getIdOfNewUser());
@@ -113,25 +119,28 @@ User UserManager::putNewUserDetails(){
     return user;
 }
 
-int UserManager::getIdOfNewUser(){
+int UserManager::getIdOfNewUser()
+{
     if (users.empty() == true)
         return 1;
     else
         return users.back().getId() + 1;
 }
 
-bool UserManager::loginExists(string login){
+bool UserManager::loginExists(string login)
+{
     for (size_t i = 0; i < users.size(); i++)
     {
         if (users[i].getLogin() == login)
         {
-            cout << endl << "Istnieje User o takim loginie." << endl;
+            cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
             return true;
         }
     }
     return false;
 }
 
-void UserManager::logUserOut(){
+void UserManager::logUserOut()
+{
     idOfLoggedUser = 0;
 }

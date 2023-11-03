@@ -50,6 +50,8 @@ vector <Operation> OutcomesFile::readOutcomesFromFile(int idOfLoggedUser)
             xml.IntoElem();
             xml.FindElem("outcomeId");
             lastOutcomeId = AdditionalMethods::convertStringToInt(xml.GetElemContent());
+/*usunac*/            cout << lastOutcomeId << endl;
+            system("pause");
             outcome.setOperationId(lastOutcomeId);
             xml.FindElem("userId");
 
@@ -62,9 +64,10 @@ vector <Operation> OutcomesFile::readOutcomesFromFile(int idOfLoggedUser)
                 outcome.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("outcomeAmount");
                 outcome.setOperationAmount(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
-                xml.OutOfElem();
                 outcomes.push_back(outcome);
             }
+
+            xml.OutOfElem();
         }
     }
     return outcomes;

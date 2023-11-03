@@ -38,8 +38,6 @@ Operation FlowManager::getOperationDetails()
 
 void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
 {
-    vector <Operation> incomesOfRange;
-    vector <Operation> outcomesOfRange;
     Operation temporaryOperation;
     int dateSearched;
     int incomesSum = 0;
@@ -49,57 +47,49 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
     {
         temporaryOperation = incomes[i];
         dateSearched = temporaryOperation.getOperationDate();
-        if (AdditionalMethods::isDateOneEarlierThanDateTwo(dateFrom, dateSearched) && AdditionalMethods::isDateOneEarlierThanDateTwo(dateSearched, dateTo))
-            {
-                incomesOfRange.push_back(temporaryOperation);
-            }
+        if (dateSearched >= dateFrom && dateSearched <= dateTo)
+        {
+            incomesSum = incomesSum + temporaryOperation.getOperationAmount();
+            cout << endl << temporaryOperation.getOperationDate();
+            cout << endl << temporaryOperation.getOperationAmount();
+            cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
+        }
     }
+    cout << " Suma przychodow: " << incomesSum << endl;
+    system("pause");
 
     for (size_t i = 0; i < outcomes.size(); i++)
     {
         temporaryOperation = outcomes[i];
         dateSearched = temporaryOperation.getOperationDate();
-        if (AdditionalMethods::isDateOneEarlierThanDateTwo(dateFrom, dateSearched) && AdditionalMethods::isDateOneEarlierThanDateTwo(dateSearched, dateTo))
+        if (dateSearched >= dateFrom && dateSearched <= dateTo)
             {
-                outcomesOfRange.push_back(temporaryOperation);
+                outcomesSum = outcomesSum + temporaryOperation.getOperationAmount();
+                cout << endl << temporaryOperation.getOperationDate();
+                cout << endl << temporaryOperation.getOperationAmount();
+                cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
             }
     }
-
-    for (size_t i = 0; i < incomesOfRange.size(); i++)
-    {
-        incomesSum = incomesSum + incomesOfRange[i].getOperationAmount();
-        cout << endl << incomesOfRange[i].getOperationId();
-        cout << endl << incomesOfRange[i].getOperationAmount();
-        cout << endl << incomesOfRange[i].getOperationNameFromUser() << endl;
-    }
-
-    cout << " Suma przychodow: " << incomesSum << endl;
-    system("pause");
-
-        for (size_t i = 0; i < outcomesOfRange.size(); i++)
-    {
-        outcomesSum = outcomesSum + outcomesOfRange[i].getOperationAmount();
-        cout << endl << outcomesOfRange[i].getOperationId();
-        cout << endl << outcomesOfRange[i].getOperationDate();
-        cout << endl << outcomesOfRange[i].getOperationAmount();
-        cout << endl << outcomesOfRange[i].getOperationNameFromUser() << endl;
-    }
-
     cout << " Suma wydatkow: " << outcomesSum << endl;
     cout << " Bilans: " << incomesSum - outcomesSum << endl;
     system("pause");
 }
 
-void FlowManager::printAllIncomesAndOutcomes()
+void FlowManager::printIO()
 {
-    for (size_t i = 0; i < incomes.size(); i++)
+        for (size_t i = 0; i < incomes.size(); i++)
     {
+        cout << endl << incomes[i].getOperationId();
+        cout << endl << incomes[i].getOperationDate();
         cout << endl << incomes[i].getOperationAmount();
         cout << endl << incomes[i].getOperationNameFromUser() << endl;
     }
     system("pause");
+
         for (size_t i = 0; i < outcomes.size(); i++)
     {
+        cout << endl << outcomes[i].getOperationId();
+        cout << endl << outcomes[i].getOperationDate();
         cout << endl << outcomes[i].getOperationAmount();
         cout << endl << outcomes[i].getOperationNameFromUser() << endl;
     }

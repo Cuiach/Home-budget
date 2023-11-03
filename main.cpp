@@ -1,22 +1,13 @@
 #include <iostream>
-//#include <windows.h>
-//#include <chrono>
-//#include <ctime>
 #include "date.h"
-//#include "tz.h"
-
 #include "BudgetApp.h"
-
 #include "AdditionalMethods.h"
 
 using namespace std;
 
-//#include <iomanip>
-//#include <ctime>
-
 int main()
 {
-BudgetApp budgetApp("Users.xml");
+BudgetApp budgetApp("Users.xml", "Incomes.xml", "Outcomes.xml");
 char choice;
 
 while (true)
@@ -49,6 +40,7 @@ while (true)
         case '5': budgetApp.printChosenRangeInOut(); break;
         case '6': budgetApp.changePassword(); break;
         case '7': budgetApp.logUserOut(); break;
+        case '8': budgetApp.printIO(); break;
         }
     }
 }

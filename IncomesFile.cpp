@@ -11,13 +11,13 @@ void IncomesFile::addIncomeToFile(Operation income)
 
     CMarkup xml;
 
-    if (!xml.Load("Incomes.xml"))
+    if (!xml.Load(FILE_NAME))
     {
         xml.AddElem("incomes");
-        xml.Save("Incomes.xml");
+        xml.Save(FILE_NAME);
     }
 
-    xml.Load("Incomes.xml");
+    xml.Load(FILE_NAME);
     xml.FindElem("incomes");
     xml.IntoElem();
 
@@ -30,7 +30,7 @@ void IncomesFile::addIncomeToFile(Operation income)
     xml.AddElem("incomeItem", income.getOperationNameFromUser());
     xml.AddElem("incomeAmount", income.getOperationAmount());
 
-    xml.Save("Incomes.xml");
+    xml.Save(FILE_NAME);
     ++lastItemId;
 }
 
@@ -40,7 +40,7 @@ vector <Operation> IncomesFile::readIncomesFromFile(int idOfLoggedUser)
     Operation income;
     CMarkup xml;
 
-        if (xml.Load("Incomes.xml"))
+        if (xml.Load(FILE_NAME))
     {
         xml.FindElem("incomes");
         xml.IntoElem();
@@ -62,10 +62,10 @@ vector <Operation> IncomesFile::readIncomesFromFile(int idOfLoggedUser)
                 income.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("incomeAmount");
                 income.setOperationAmount(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
-                xml.OutOfElem();
                 incomes.push_back(income);
             }
-        }
+
+            xml.OutOfElem();        }
     }
     return incomes;
 }

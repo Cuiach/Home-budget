@@ -18,12 +18,11 @@ public:
     static char chooseOptionFromEditMenu();
     static char readSign();
     static int getDateAndConvertToInt();
-    static string changeFirstLetterCapitalNextSmall(string tekst);
-    static string convertIntToString(int liczba);
+    static string changeFirstLetterCapitalNextSmall(string text);
+    static string convertIntToString(int number);
     static string readLine();
-    static string getNumber(string tekst, int pozycjaZnaku);
-    static int convertStringToInt(string liczba);
-    static bool isDateOneEarlierThanDateTwo(int date1, int date2);
+    static string getNumber(string text, int signPosition);
+    static int convertStringToInt(string number);
 };
 
 #endif

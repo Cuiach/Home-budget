@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-
 #include "Markup.h"
 #include "User.h"
 #include "AdditionalMethods.h"
@@ -14,9 +13,6 @@ using namespace std;
 
 class UsersFile :public DataFile::DataFile
 {
-    string changeUserDetailsIntoLineOfDataDividedByPipes(User user);
-    User getUserDetails(string userDetailsDividedByPipes);
-
 public:
     UsersFile(string fileName) : DataFile(fileName) {};
     vector <User> readUsersFromFile();

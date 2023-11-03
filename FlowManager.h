@@ -19,7 +19,7 @@ class FlowManager
     Operation getOperationDetails();
 
 public:
-    FlowManager (int idOfLoggedUser) : ID_OF_LOGGED_USER(idOfLoggedUser)
+    FlowManager (string incomesFileName, string outcomesFileName, int idOfLoggedUser) : incomesFile(incomesFileName), outcomesFile(outcomesFileName), ID_OF_LOGGED_USER(idOfLoggedUser)
     {
         outcomes = outcomesFile.readOutcomesFromFile(ID_OF_LOGGED_USER);
         incomes = incomesFile.readIncomesFromFile(ID_OF_LOGGED_USER);
@@ -28,7 +28,7 @@ public:
     void addOutcome();
     void addIncome();
     void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
-    void printAllIncomesAndOutcomes();
+    void printIO();
 };
 
 

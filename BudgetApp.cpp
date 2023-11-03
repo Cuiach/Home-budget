@@ -65,15 +65,16 @@ void BudgetApp::printLastMonthInOut()
 
     if (month != 1)
     {
-
-        dateFrom = year*10000 + (month-1)*100 + 1;
-        dateTo = year*10000 + (month-1)*100 + getLastDayOfMonth(year, month);
-  }
-  else
-  {
+        month = month -1;
+        dateFrom = year*10000 + (month)*100 + 1;
+        dateTo = year*10000 + (month)*100 + getLastDayOfMonth(year, month);
+    }
+    else
+    {
       dateFrom = (year-1)*10000 + 1201;
       dateFrom = (year-1)*10000 + 1231;
-  }
+    }
+
     flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
 
@@ -88,24 +89,29 @@ void BudgetApp::printChosenRangeInOut()
         {
             cout << endl << " Data konca musi byc po dacie poczatku. Sprobuj jeszcze raz";
         }
+
         cout << endl << " Wpisz date poczatku obliczenia bilansu: ";
         dateFrom = AdditionalMethods::getDateAndConvertToInt();
         cout << endl << " Wpisz date konca obliczenia bilansu: ";
         dateTo = AdditionalMethods::getDateAndConvertToInt();
+
         ++excludeFirstOccurence;
-    } while (AdditionalMethods::isDateOneEarlierThanDateTwo(dateTo, dateFrom));
+
+    } while (dateFrom > dateTo);
 
     flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
 
-void BudgetApp::printInOut()
+void BudgetApp::printIO()
 {
-    flowManager->printAllIncomesAndOutcomes();
+    flowManager->printIO();
 }
 
 void BudgetApp::logUserOut()
 {
     userManager.logUserOut();
+    delete flowManager;
+    flowManager = NULL;
 }
 
 void BudgetApp::registerUser()
@@ -118,7 +124,7 @@ void BudgetApp::logIn()
     userManager.logUserIn();
     if (userManager.isUserLoggedIn())
     {
-        flowManager = new FlowManager(userManager.getIdOfLoggedUser());
+        flowManager = new FlowManager(INCOMES_FILE_NAME, OUTCOMES_FILE_NAME, userManager.getIdOfLoggedUser());
     }
 }
 

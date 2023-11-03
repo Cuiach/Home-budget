@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <ctime>
-
 #include "UserManager.h"
 #include "FlowManager.h"
 
@@ -14,21 +13,26 @@ class BudgetApp
     UserManager userManager;
     FlowManager *flowManager;
 
+    const string INCOMES_FILE_NAME;
+    const string OUTCOMES_FILE_NAME;
+
     int getLastDayOfMonth(int year, int month);
     int getCurrentYearMonth();
 
 public:
-    BudgetApp(string nameOfUsersFile) : userManager(nameOfUsersFile)  {
+    BudgetApp(string nameOfUsersFile, string nameOfIncomesFile, string nameOfOutcomesFile) : userManager(nameOfUsersFile), INCOMES_FILE_NAME(nameOfIncomesFile), OUTCOMES_FILE_NAME(nameOfOutcomesFile) {
         flowManager = NULL;
     };
     ~BudgetApp(){
+        delete flowManager;
+        flowManager = NULL;
     };
     void addOutcome();
     void addIncome();
     void printThisMonthInOut();
     void printLastMonthInOut();
     void printChosenRangeInOut();
-    void printInOut();
+    void printIO();
     void registerUser();
     void logIn();
     void logUserOut();
