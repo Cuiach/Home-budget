@@ -27,6 +27,7 @@ public:
     void addIncome();
     void printThisMonthInOut();
     void printLastMonthInOut();
+    void printChosenRangeInOut();
     void printInOut();
     void registerUser();
     void logIn();

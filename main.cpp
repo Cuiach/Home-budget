@@ -46,7 +46,7 @@ while (true)
         case '2': budgetApp.addOutcome(); break;
         case '3': budgetApp.printThisMonthInOut(); break;
         case '4': budgetApp.printLastMonthInOut(); break;
-//        case '5': budgetApp.(); break;
+        case '5': budgetApp.printChosenRangeInOut(); break;
         case '6': budgetApp.changePassword(); break;
         case '7': budgetApp.logUserOut(); break;
         }

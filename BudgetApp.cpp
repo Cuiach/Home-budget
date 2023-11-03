@@ -77,6 +77,27 @@ void BudgetApp::printLastMonthInOut()
     flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
 
+void BudgetApp::printChosenRangeInOut()
+{
+    int dateFrom = 0;
+    int dateTo = 0;
+    int excludeFirstOccurence = 0;
+
+    do {
+        if (excludeFirstOccurence != 0)
+        {
+            cout << endl << " Data konca musi byc po dacie poczatku. Sprobuj jeszcze raz";
+        }
+        cout << endl << " Wpisz date poczatku obliczenia bilansu: ";
+        dateFrom = AdditionalMethods::getDateAndConvertToInt();
+        cout << endl << " Wpisz date konca obliczenia bilansu: ";
+        dateTo = AdditionalMethods::getDateAndConvertToInt();
+        ++excludeFirstOccurence;
+    } while (AdditionalMethods::isDateOneEarlierThanDateTwo(dateTo, dateFrom));
+
+    flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
+}
+
 void BudgetApp::printInOut()
 {
     flowManager->printAllIncomesAndOutcomes();
