@@ -1,38 +1,5 @@
 #include "BudgetApp.h"
 
-int BudgetApp::getLastDayOfMonth(int year, int month)
-{
-    int lastDayOfMonth = 0;
-
-    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-    {
-        lastDayOfMonth = 31;
-    }
-    else if ((month == 4 || month == 6 || month == 9 || month == 11))
-    {
-        lastDayOfMonth = 30;
-    }
-    else if ((month == 2) && (year % 4 == 0))
-    {
-        lastDayOfMonth = 29;
-    }
-    else if ((month == 2) && (year % 4 != 0))
-    {
-        lastDayOfMonth = 28;
-    }
-
-    return lastDayOfMonth;
-}
-
-int BudgetApp::getCurrentYearMonth()
-{
-    time_t temporaryTime = time(nullptr);
-    tm *const timeToGetYearAndMonth = localtime(&temporaryTime);
-    int year = 1900 + timeToGetYearAndMonth->tm_year;
-    int month = timeToGetYearAndMonth->tm_mon + 1;
-    return year*100 + month;
-}
-
 void BudgetApp::addOutcome()
 {
     flowManager->addOutcome();
@@ -47,11 +14,11 @@ void BudgetApp::printThisMonthInOut()
 {
     int dateFrom = 0;
     int dateTo = 0;
-    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(0,4)));
-    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(4,2)));
+    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(0,4)));
+    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(4,2)));
 
     dateFrom = year*10000 + (month)*100 + 1;
-    dateTo = year*10000 + (month)*100 + getLastDayOfMonth(year, month);
+    dateTo = year*10000 + (month)*100 + AdditionalMethods::getLastDayOfMonth(year, month);
 
     flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
@@ -60,14 +27,14 @@ void BudgetApp::printLastMonthInOut()
 {
     int dateFrom = 0;
     int dateTo = 0;
-    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(0,4)));
-    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(getCurrentYearMonth()).substr(4,2)));
+    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(0,4)));
+    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(4,2)));
 
     if (month != 1)
     {
         month = month -1;
         dateFrom = year*10000 + (month)*100 + 1;
-        dateTo = year*10000 + (month)*100 + getLastDayOfMonth(year, month);
+        dateTo = year*10000 + (month)*100 + AdditionalMethods::getLastDayOfMonth(year, month);
     }
     else
     {

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class IncomesFile //:public OperationsFile::OperationsFile
+class IncomesFile // :public OperationsFile::OperationsFile
 {
     const string FILE_NAME;
     int lastItemId = 0;

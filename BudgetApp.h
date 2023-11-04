@@ -16,9 +16,6 @@ class BudgetApp
     const string INCOMES_FILE_NAME;
     const string OUTCOMES_FILE_NAME;
 
-    int getLastDayOfMonth(int year, int month);
-    int getCurrentYearMonth();
-
 public:
     BudgetApp(string nameOfUsersFile, string nameOfIncomesFile, string nameOfOutcomesFile) : userManager(nameOfUsersFile), INCOMES_FILE_NAME(nameOfIncomesFile), OUTCOMES_FILE_NAME(nameOfOutcomesFile) {
         flowManager = NULL;

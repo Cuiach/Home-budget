@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class OutcomesFile //:public OperationsFile::OperationsFile
+class OutcomesFile //:public OperationsFile::OperationsFile - to piesn niedalekiej przyszlosci
 {
     const string FILE_NAME;
     int lastOutcomeId = 0;

@@ -24,13 +24,12 @@ Operation FlowManager::getOperationDetails()
 
     operation.setOperationuUserId(ID_OF_LOGGED_USER);
 
-    cout << " Kwota: " << endl;
+    cout << " Kwota: ";
     operation.setOperationAmount(AdditionalMethods::convertStringToInt(AdditionalMethods::readLine()));
 
-    cout << " Data: " << endl;
     operation.setOperationDate(AdditionalMethods::getDateAndConvertToInt());
 
-    cout << " Rodzaj/nazwa/typ: " << endl;
+    cout << " Rodzaj/nazwa/typ: ";
     operation.setOperationNameFromUser(AdditionalMethods::readLine());
 
     return operation;
