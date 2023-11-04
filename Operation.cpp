@@ -20,7 +20,7 @@ void Operation::setOperationNameFromUser(string newOperationNameFromUser)
     operationNameFromUser = newOperationNameFromUser;
 }
 
-void Operation::setOperationAmount(int newOperationAmount)
+void Operation::setOperationAmount(float newOperationAmount)
 {
     operationAmount = newOperationAmount;
 }
@@ -45,7 +45,7 @@ string Operation::getOperationNameFromUser()
     return operationNameFromUser;
 }
 
-int Operation::getOperationAmount()
+float Operation::getOperationAmount()
 {
     return operationAmount;
 }

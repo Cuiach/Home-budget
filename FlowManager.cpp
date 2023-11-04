@@ -21,11 +21,23 @@ void FlowManager::addIncome()
 Operation FlowManager::getOperationDetails()
 {
     Operation operation;
+    int checkFirstOccurence = 0;
+    float amountToCheck = 0;
 
     operation.setOperationuUserId(ID_OF_LOGGED_USER);
 
-    cout << " Kwota: ";
-    operation.setOperationAmount(AdditionalMethods::convertStringToInt(AdditionalMethods::readLine()));
+    do
+    {
+        if (checkFirstOccurence != 0)
+        {
+            cout << "Blednie podana kwota. Sprobuj jeszcze raz!";
+        }
+        cout << " Kwota: ";
+        amountToCheck = AdditionalMethods::convertStringToFloat(AdditionalMethods::readLine());
+        ++checkFirstOccurence;
+    } while (amountToCheck == -1);
+
+    operation.setOperationAmount(amountToCheck);
 
     operation.setOperationDate(AdditionalMethods::getDateAndConvertToInt());
 
@@ -39,8 +51,8 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
 {
     Operation temporaryOperation;
     int dateSearched;
-    int incomesSum = 0;
-    int outcomesSum = 0;
+    float incomesSum = 0;
+    float outcomesSum = 0;
 
     for (size_t i = 0; i < incomes.size(); i++)
     {

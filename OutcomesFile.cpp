@@ -28,7 +28,7 @@ void OutcomesFile::addOutcomeToFile(Operation outcome)
     xml.AddElem("userId", outcome.getOperationUserId());
     xml.AddElem("outcomeDate", outcome.getOperationDate());
     xml.AddElem("outcomeItem", outcome.getOperationNameFromUser());
-    xml.AddElem("outcomeAmount", outcome.getOperationAmount());
+    xml.AddElem("outcomeAmount", to_string(outcome.getOperationAmount()));
 
     xml.Save("Outcomes.xml");
     ++lastOutcomeId;
@@ -61,7 +61,7 @@ vector <Operation> OutcomesFile::readOutcomesFromFile(int idOfLoggedUser)
                 xml.FindElem("outcomeItem");
                 outcome.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("outcomeAmount");
-                outcome.setOperationAmount(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
+                outcome.setOperationAmount(AdditionalMethods::convertStringToFloat(xml.GetElemContent()));
                 outcomes.push_back(outcome);
             }
 

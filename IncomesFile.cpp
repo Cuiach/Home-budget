@@ -28,7 +28,7 @@ void IncomesFile::addIncomeToFile(Operation income)
     xml.AddElem("userId", income.getOperationUserId());
     xml.AddElem("incomeDate", income.getOperationDate());
     xml.AddElem("incomeItem", income.getOperationNameFromUser());
-    xml.AddElem("incomeAmount", income.getOperationAmount());
+    xml.AddElem("incomeAmount", to_string(income.getOperationAmount()));
 
     xml.Save(FILE_NAME);
     ++lastItemId;
@@ -61,7 +61,7 @@ vector <Operation> IncomesFile::readIncomesFromFile(int idOfLoggedUser)
                 xml.FindElem("incomeItem");
                 income.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("incomeAmount");
-                income.setOperationAmount(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
+                income.setOperationAmount(AdditionalMethods::convertStringToFloat(xml.GetElemContent()));
                 incomes.push_back(income);
             }
 

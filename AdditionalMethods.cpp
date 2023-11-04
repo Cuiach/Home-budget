@@ -138,6 +138,37 @@ string AdditionalMethods::getNumber(string text, int signPosition)
     return number;
 }
 
+float AdditionalMethods::convertStringToFloat(string text)
+{
+    float number = 0;
+    int secondPartLength = 0;
+    string firstPartOfNumber = getNumber(text, 0);
+
+    if (firstPartOfNumber == text)
+        return convertStringToInt(firstPartOfNumber);
+
+    int a = firstPartOfNumber.length();
+    if (!(text[a] == ',' || text[a] == '.'))
+    {
+        return -1;
+    }
+
+    string secondPartOfNumber = getNumber(text, firstPartOfNumber.length()+1);
+
+    if (!((firstPartOfNumber.length() + secondPartOfNumber.length() + 1) == text.length()))
+        {
+            return -1;
+        }
+
+    number = convertStringToInt(firstPartOfNumber);
+    secondPartLength = secondPartOfNumber.length();
+    int secondPart = convertStringToInt(secondPartOfNumber);
+    number = number + (secondPart/(pow(10,secondPartLength)));
+
+    return number;
+}
+
+
 int AdditionalMethods::convertStringToInt(string number)
 {
     int numberInt;

@@ -24,6 +24,7 @@ public:
     static int getLastDayOfMonth(int year, int month);
     static int getCurrentYearMonthDay();
     static string getNumber(string text, int signPosition);
+    static float convertStringToFloat(string text);
     static int convertStringToInt(string number);
     static int checkAndReturnDate(string dateFromUser);
 };
