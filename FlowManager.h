@@ -29,6 +29,9 @@ public:
     void addOutcome();
     void addIncome();
     void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
+    void printThisMonthInOut();
+    void printLastMonthInOut();
+    void printChosenRangeInOut();
     void printIO();
 };
 
