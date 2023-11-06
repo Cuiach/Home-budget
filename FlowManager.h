@@ -2,6 +2,7 @@
 #define FLOWMANAGER_H
 
 #include "AdditionalMethods.h"
+#include "DateMethods.h"
 #include "Operation.h"
 #include "IncomesFile.h"
 #include "OutcomesFile.h"

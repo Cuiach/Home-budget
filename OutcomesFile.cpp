@@ -61,7 +61,7 @@ vector <Operation> OutcomesFile::readOutcomesFromFile(int idOfLoggedUser)
                 xml.FindElem("outcomeItem");
                 outcome.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("outcomeAmount");
-                outcome.setOperationAmount(AdditionalMethods::convertStringToFloat(xml.GetElemContent()));
+                outcome.setOperationAmount(AdditionalMethods::convertStringToFloatExcludingZero(xml.GetElemContent()));
                 outcomes.push_back(outcome);
             }
 

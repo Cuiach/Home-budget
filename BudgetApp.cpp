@@ -14,11 +14,11 @@ void BudgetApp::printThisMonthInOut()
 {
     int dateFrom = 0;
     int dateTo = 0;
-    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(0,4)));
-    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(4,2)));
+    int year = DateMethods::getCurrentYearMonthDay()/10000;
+    int month = (DateMethods::getCurrentYearMonthDay() - year*10000) / 100;
 
     dateFrom = year*10000 + (month)*100 + 1;
-    dateTo = year*10000 + (month)*100 + AdditionalMethods::getLastDayOfMonth(year, month);
+    dateTo = year*10000 + (month)*100 + DateMethods::getLastDayOfMonth(year, month);
 
     flowManager->printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
@@ -27,14 +27,14 @@ void BudgetApp::printLastMonthInOut()
 {
     int dateFrom = 0;
     int dateTo = 0;
-    int year = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(0,4)));
-    int month = AdditionalMethods::convertStringToInt((AdditionalMethods::convertIntToString(AdditionalMethods::getCurrentYearMonthDay()).substr(4,2)));
+    int year = DateMethods::getCurrentYearMonthDay() / 10000;
+    int month = (DateMethods::getCurrentYearMonthDay() - year * 10000) / 100;
 
     if (month != 1)
     {
         month = month -1;
         dateFrom = year*10000 + (month)*100 + 1;
-        dateTo = year*10000 + (month)*100 + AdditionalMethods::getLastDayOfMonth(year, month);
+        dateTo = year*10000 + (month)*100 + DateMethods::getLastDayOfMonth(year, month);
     }
     else
     {
@@ -58,9 +58,9 @@ void BudgetApp::printChosenRangeInOut()
         }
 
         cout << endl << " Wpisz date poczatku obliczenia bilansu: ";
-        dateFrom = AdditionalMethods::getDateAndConvertToInt();
+        dateFrom = DateMethods::getDateAndConvertToInt();
         cout << endl << " Wpisz date konca obliczenia bilansu: ";
-        dateTo = AdditionalMethods::getDateAndConvertToInt();
+        dateTo = DateMethods::getDateAndConvertToInt();
 
         ++excludeFirstOccurence;
 

@@ -61,7 +61,7 @@ vector <Operation> IncomesFile::readIncomesFromFile(int idOfLoggedUser)
                 xml.FindElem("incomeItem");
                 income.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem("incomeAmount");
-                income.setOperationAmount(AdditionalMethods::convertStringToFloat(xml.GetElemContent()));
+                income.setOperationAmount(AdditionalMethods::convertStringToFloatExcludingZero(xml.GetElemContent()));
                 incomes.push_back(income);
             }
 

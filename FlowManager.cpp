@@ -33,13 +33,13 @@ Operation FlowManager::getOperationDetails()
             cout << "Blednie podana kwota. Sprobuj jeszcze raz!";
         }
         cout << " Kwota: ";
-        amountToCheck = AdditionalMethods::convertStringToFloat(AdditionalMethods::readLine());
+        amountToCheck = AdditionalMethods::convertStringToFloatExcludingZero(AdditionalMethods::readLine());
         ++checkFirstOccurence;
     } while (amountToCheck == -1);
 
     operation.setOperationAmount(amountToCheck);
 
-    operation.setOperationDate(AdditionalMethods::getDateAndConvertToInt());
+    operation.setOperationDate(DateMethods::getDateAndConvertToInt());
 
     cout << " Rodzaj/nazwa/typ: ";
     operation.setOperationNameFromUser(AdditionalMethods::readLine());
