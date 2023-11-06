@@ -2,6 +2,7 @@
 #include "date.h"
 #include "BudgetApp.h"
 #include "AdditionalMethods.h"
+#include "Menus.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ int main()
     {
         if (budgetApp.isUserLogged() == 0)
         {
-            choice = AdditionalMethods::chooseOptionFromMainMenu();
+            choice = Menus::chooseOptionFromMainMenu();
 
             switch (choice)
             {
@@ -29,7 +30,7 @@ int main()
         }
         else
         {
-            choice = AdditionalMethods::chooseOptionFromLoggedUserMenu();
+            choice = Menus::chooseOptionFromLoggedUserMenu();
 
             switch (choice)
             {

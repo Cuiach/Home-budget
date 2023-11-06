@@ -13,9 +13,6 @@ class AdditionalMethods
     static int readInteger();
 
 public:
-    static char chooseOptionFromMainMenu();
-    static char chooseOptionFromLoggedUserMenu();
-    static char chooseOptionFromEditMenu();
     static char readSign();
     static string changeFirstLetterCapitalNextSmall(string text);
     static string convertIntToString(int number);
