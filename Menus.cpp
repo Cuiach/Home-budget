@@ -32,11 +32,9 @@ char Menus::chooseOptionFromLoggedUserMenu()
     cout << "---------------------------" << endl;
     cout << "6. Zmien haslo" << endl;
     cout << "7. Wyloguj sie" << endl;
-    cout << "8. wszystkie in & out" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
     choice = AdditionalMethods::readSign();
-
 
     return choice;
 }

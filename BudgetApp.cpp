@@ -25,11 +25,6 @@ void BudgetApp::printChosenRangeInOut()
     flowManager->printChosenRangeInOut();
 }
 
-void BudgetApp::printIO()
-{
-    flowManager->printIO();
-}
-
 void BudgetApp::logUserOut()
 {
     userManager.logUserOut();

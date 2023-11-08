@@ -1,13 +1,9 @@
 #include "OperationsFile.h"
 
-#include "IncomesFile.h"
+int OperationsFile::getLastItemId(){
+    return lastItemId;}
 
-//int OperationsFile::getLastItemId()
-//{
-//    return lastItemId;
-//}
-
-string getOperationTypeName(IOType ioType)
+string OperationsFile::getOperationTypeName(IOType ioType)
 {
     string typeNameSingular;
     switch (ioType){
@@ -23,21 +19,17 @@ string getOperationTypeName(IOType ioType)
 
 void OperationsFile::addOperationToFile(Operation operation, IOType ioType)
 {
-/*usunac*/ cout << "Wypisuje, jak nalezy?: " + getOperationTypeName(ioType)+"s" + " " + FILE_NAME; system("pause");
     operation.setOperationId(lastItemId+1);
 
     CMarkup xml;
 
-    if (!xml.Load(FILE_NAME))
+    if (!xml.Load(getFileName()))
     {
-cout << "CZYLI NIE PRZECHODZI "; system("pause");
         xml.AddElem(getOperationTypeName(ioType)+"s");
-        xml.Save(FILE_NAME);
+        xml.Save(getFileName());
     }
 
-
-if (xml.Load(FILE_NAME)) {cout << "W ADD PRZECHODZI "; system("pause");}
-//    xml.Load(FILE_NAME);
+    xml.Load(getFileName());
     xml.FindElem(getOperationTypeName(ioType)+"s");
     xml.IntoElem();
 
@@ -50,7 +42,7 @@ if (xml.Load(FILE_NAME)) {cout << "W ADD PRZECHODZI "; system("pause");}
     xml.AddElem(getOperationTypeName(ioType)+"Item", operation.getOperationNameFromUser());
     xml.AddElem(getOperationTypeName(ioType)+"Amount", to_string(operation.getOperationAmount()));
 
-    xml.Save(FILE_NAME);
+    xml.Save(getFileName());
     ++lastItemId;
 }
 
@@ -60,14 +52,8 @@ vector <Operation> OperationsFile::readOperationsFromFile(int idOfLoggedUser, IO
     Operation operation;
     CMarkup xml;
 
-cout << FILE_NAME;
-system("pause");
-
-        if (xml.Load(FILE_NAME))
+    if (xml.Load(getFileName()))
     {
-cout << "PRZESZLO! ";
-system("pause");
-
         xml.FindElem(getOperationTypeName(ioType)+"s");
         xml.IntoElem();
 
@@ -90,9 +76,8 @@ system("pause");
                 operation.setOperationAmount(AdditionalMethods::convertStringToFloatExcludingZero(xml.GetElemContent()));
                 operations.push_back(operation);
             }
-
-            xml.OutOfElem();        }
+            xml.OutOfElem();
+        }
     }
     return operations;
 }
-

@@ -5,22 +5,20 @@
 #include <vector>
 //#include <fstream>
 
-//#include "Markup.h"
+#include "Markup.h"
 #include "Operation.h"
-//#include "AdditionalMethods.h"
+#include "AdditionalMethods.h"
 #include "DataFile.h"
 #include "OperationType.h"
 
 using namespace std;
 
-class OperationsFile //:public DataFile::DataFile
+class OperationsFile :public DataFile
 {
-protected:
-    const string FILE_NAME;
     int lastItemId = 0;
+    string getOperationTypeName(IOType ioType);
 public:
-    OperationsFile(string fileName) : FILE_NAME(fileName) {};
-
+    OperationsFile(string fileName) : DataFile(fileName) {};
     int getLastItemId();
     void addOperationToFile(Operation operation, IOType ioType);
     vector <Operation> readOperationsFromFile(int idOfLoggedUser, IOType ioType);

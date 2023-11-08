@@ -30,7 +30,7 @@ int DateMethods::getCurrentYearMonthDay()
     tm *const timeToGetYearMonthDay = localtime(&temporaryTime);
     int year = 1900 + timeToGetYearMonthDay->tm_year;
     int month = timeToGetYearMonthDay->tm_mon + 1;
-    int day = timeToGetYearMonthDay->tm_mday + 1;
+    int day = timeToGetYearMonthDay->tm_mday;
     return year*10000 + month*100 + day;
 }
 
@@ -39,8 +39,9 @@ int DateMethods::checkAndReturnDate(string dateFromUser)
     string temporaryLetter = "";
     int year, month , day;
     int currentYear = getCurrentYearMonthDay()/10000;
-    int currentMonth = (getCurrentYearMonthDay() - year * 10000) /100;
-    int currentDay = (getCurrentYearMonthDay() - year * 10000 - month * 100);
+    int currentMonth = (getCurrentYearMonthDay() - currentYear * 10000) /100;
+    int currentDay = (getCurrentYearMonthDay() - currentYear * 10000 - currentMonth * 100);
+    system("pause");
 
     if (dateFromUser.length() != 10) return 0;
 
@@ -51,7 +52,8 @@ int DateMethods::checkAndReturnDate(string dateFromUser)
     if ((currentYear == year && (month < 1 || month > currentMonth)) || (currentYear != year && (month < 1 || month > 12))) return 0;
 
     day = AdditionalMethods::convertStringToInt(AdditionalMethods::getNumber(dateFromUser,8));
-    if (((currentYear == year && currentMonth == month) && (day < 1 || day > currentDay)) ||  ((currentYear == year && currentMonth == month) && (day < 1 || day > getLastDayOfMonth(year, month)))) return 0;
+    if (((currentYear == year && currentMonth == month) && (day < 1 || day > currentDay))
+    ||  ((!(currentYear == year && currentMonth == month)) && (day < 1 || day > getLastDayOfMonth(year, month)))) return 0;
 
     temporaryLetter = dateFromUser[4];
     if (temporaryLetter != "-") return 0;

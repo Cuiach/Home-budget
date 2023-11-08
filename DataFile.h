@@ -9,10 +9,8 @@ using namespace std;
 class DataFile
 {
     const string FILE_NAME;
-
 protected:
     DataFile(string fileName) : FILE_NAME(fileName) {}
-
     string getFileName();
 };
 #endif

@@ -17,7 +17,8 @@ class BudgetApp
     const string OUTCOMES_FILE_NAME;
 
 public:
-    BudgetApp(string nameOfUsersFile, string nameOfIncomesFile, string nameOfOutcomesFile) : userManager(nameOfUsersFile), INCOMES_FILE_NAME(nameOfIncomesFile), OUTCOMES_FILE_NAME(nameOfOutcomesFile) {
+    BudgetApp(string nameOfUsersFile, string nameOfIncomesFile, string nameOfOutcomesFile)
+        : userManager(nameOfUsersFile), INCOMES_FILE_NAME(nameOfIncomesFile), OUTCOMES_FILE_NAME(nameOfOutcomesFile) {
         flowManager = NULL;
     };
     ~BudgetApp(){

@@ -3,25 +3,17 @@
 
 #include <iostream>
 #include <vector>
-#include "Markup.h"
-#include "Operation.h"
-#include "AdditionalMethods.h"
-#include "DataFile.h"
+
 #include "OperationsFile.h"
 #include "OperationType.h"
 
 using namespace std;
 
-class OutcomesFile :public OperationsFile::OperationsFile
+class OutcomesFile :public OperationsFile
 {
     const IOType ioType = OUTCOME;
-
 public:
-    OutcomesFile(string outcomesFileName) : OperationsFile(outcomesFileName) {};
-
-    int getLastItemId();
-    void addOutcomeToFile(Operation outcome);
-//    vector <Operation> readOutcomesFromFile(int idOfLoggedUser);
+    OutcomesFile(string outcomesFileName) : OperationsFile(outcomesFileName){};
 };
 
 #endif

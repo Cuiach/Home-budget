@@ -14,9 +14,10 @@ void FlowManager::addIncome()
 {
     cout << " --- Dodajesz dochod ---\n";
     Operation income = getOperationDetails();
+    IOType ioType = INCOME;
     income.setOperationId(incomesFile.getLastItemId() + 1);
     incomes.push_back(income);
-    incomesFile.addIncomeToFile(income);
+    incomesFile.addOperationToFile(income, ioType);
 }
 
 Operation FlowManager::getOperationDetails()
@@ -84,7 +85,10 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
                 cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
             }
     }
-    cout << " Suma wydatkow: " << outcomesSum << endl;
+    cout << " Suma wydatkow: " << outcomesSum << endl << endl;
+    cout << " --------BILANS------- " << endl;
+    cout << " Przychody: " << incomesSum << endl;
+    cout << " Wydatki: " << outcomesSum << endl;
     cout << " Bilans: " << incomesSum - outcomesSum << endl;
     system("pause");
 }
@@ -147,25 +151,3 @@ void FlowManager::printChosenRangeInOut()
 
     printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }
-
-void FlowManager::printIO()
-{
-        for (size_t i = 0; i < incomes.size(); i++)
-    {
-        cout << endl << incomes[i].getOperationId();
-        cout << endl << incomes[i].getOperationDate();
-        cout << endl << incomes[i].getOperationAmount();
-        cout << endl << incomes[i].getOperationNameFromUser() << endl;
-    }
-    system("pause");
-
-        for (size_t i = 0; i < outcomes.size(); i++)
-    {
-        cout << endl << outcomes[i].getOperationId();
-        cout << endl << outcomes[i].getOperationDate();
-        cout << endl << outcomes[i].getOperationAmount();
-        cout << endl << outcomes[i].getOperationNameFromUser() << endl;
-    }
-    system("pause");
-}
-

@@ -3,23 +3,17 @@
 
 #include <iostream>
 #include <vector>
-#include "Markup.h"
-#include "Operation.h"
-#include "AdditionalMethods.h"
-#include "DataFile.h"
+
+#include "OperationsFile.h"
+#include "OperationType.h"
 
 using namespace std;
 
-class IncomesFile // :public OperationsFile::OperationsFile
+class IncomesFile :public OperationsFile
 {
-    const string FILE_NAME;
-    int lastItemId = 0;
-
+    const IOType ioType = INCOME;
 public:
-    IncomesFile(string incomesFileName) : FILE_NAME(incomesFileName) {};
-    int getLastItemId();
-    void addIncomeToFile(Operation income);
-    vector <Operation> readIncomesFromFile(int idOfLoggedUser);
+    IncomesFile(string incomesFileName) : OperationsFile(incomesFileName){};
 };
 
 #endif

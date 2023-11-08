@@ -47,7 +47,6 @@ int main()
             case '5': budgetApp.printChosenRangeInOut(); break;
             case '6': budgetApp.changePassword(); break;
             case '7': budgetApp.logUserOut(); break;
-            case '8': budgetApp.printIO(); break;
             }
         }
     }

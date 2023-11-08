@@ -6,7 +6,6 @@
 #include "Operation.h"
 #include "IncomesFile.h"
 #include "OutcomesFile.h"
-#include "OperationsFile.h"
 
 using namespace std;
 
@@ -26,16 +25,13 @@ public:
         : incomesFile(incomesFileName), outcomesFile(outcomesFileName), ID_OF_LOGGED_USER(idOfLoggedUser)
     {
         outcomes = outcomesFile.readOperationsFromFile(ID_OF_LOGGED_USER, OUTCOME);
-        incomes = incomesFile.readIncomesFromFile(ID_OF_LOGGED_USER);
+        incomes = incomesFile.readOperationsFromFile(ID_OF_LOGGED_USER, INCOME);
     };
-
     void addOutcome();
     void addIncome();
     void printThisMonthInOut();
     void printLastMonthInOut();
     void printChosenRangeInOut();
-/*usunac - tylko do debugowania*/    void printIO();
 };
-
 
 #endif
