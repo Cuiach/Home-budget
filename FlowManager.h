@@ -6,6 +6,7 @@
 #include "Operation.h"
 #include "IncomesFile.h"
 #include "OutcomesFile.h"
+#include "OperationsFile.h"
 
 using namespace std;
 
@@ -17,22 +18,23 @@ class FlowManager
     vector <Operation> incomes;
     vector <Operation> outcomes;
 
+    void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
     Operation getOperationDetails();
 
 public:
-    FlowManager (string incomesFileName, string outcomesFileName, int idOfLoggedUser) : incomesFile(incomesFileName), outcomesFile(outcomesFileName), ID_OF_LOGGED_USER(idOfLoggedUser)
+    FlowManager (string incomesFileName, string outcomesFileName, int idOfLoggedUser)
+        : incomesFile(incomesFileName), outcomesFile(outcomesFileName), ID_OF_LOGGED_USER(idOfLoggedUser)
     {
-        outcomes = outcomesFile.readOutcomesFromFile(ID_OF_LOGGED_USER);
+        outcomes = outcomesFile.readOperationsFromFile(ID_OF_LOGGED_USER, OUTCOME);
         incomes = incomesFile.readIncomesFromFile(ID_OF_LOGGED_USER);
     };
 
     void addOutcome();
     void addIncome();
-    void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
     void printThisMonthInOut();
     void printLastMonthInOut();
     void printChosenRangeInOut();
-    void printIO();
+/*usunac - tylko do debugowania*/    void printIO();
 };
 
 

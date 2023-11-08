@@ -7,20 +7,21 @@
 #include "Operation.h"
 #include "AdditionalMethods.h"
 #include "DataFile.h"
+#include "OperationsFile.h"
+#include "OperationType.h"
 
 using namespace std;
 
-class OutcomesFile //:public OperationsFile::OperationsFile - to piesn niedalekiej przyszlosci
+class OutcomesFile :public OperationsFile::OperationsFile
 {
-    const string FILE_NAME;
-    int lastOutcomeId = 0;
+    const IOType ioType = OUTCOME;
 
 public:
-    OutcomesFile(string outcomesFileName) : FILE_NAME(outcomesFileName) {};
+    OutcomesFile(string outcomesFileName) : OperationsFile(outcomesFileName) {};
 
     int getLastItemId();
     void addOutcomeToFile(Operation outcome);
-    vector <Operation> readOutcomesFromFile(int idOfLoggedUser);
+//    vector <Operation> readOutcomesFromFile(int idOfLoggedUser);
 };
 
 #endif

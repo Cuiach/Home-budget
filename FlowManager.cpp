@@ -4,9 +4,10 @@ void FlowManager::addOutcome()
 {
     cout << " --- Dodajesz wydatek ---\n";
     Operation outcome = getOperationDetails();
+    IOType ioType = OUTCOME;
     outcome.setOperationId(outcomesFile.getLastItemId() + 1);
     outcomes.push_back(outcome);
-    outcomesFile.addOutcomeToFile(outcome);
+    outcomesFile.addOperationToFile(outcome, ioType);
 }
 
 void FlowManager::addIncome()
@@ -61,6 +62,7 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
         if (dateSearched >= dateFrom && dateSearched <= dateTo)
         {
             incomesSum = incomesSum + temporaryOperation.getOperationAmount();
+            cout << endl << temporaryOperation.getOperationId();
             cout << endl << temporaryOperation.getOperationDate();
             cout << endl << temporaryOperation.getOperationAmount();
             cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
@@ -76,6 +78,7 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
         if (dateSearched >= dateFrom && dateSearched <= dateTo)
             {
                 outcomesSum = outcomesSum + temporaryOperation.getOperationAmount();
+                cout << endl << temporaryOperation.getOperationId();
                 cout << endl << temporaryOperation.getOperationDate();
                 cout << endl << temporaryOperation.getOperationAmount();
                 cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
