@@ -5,8 +5,6 @@
 #include "Menus.h"
 #include "OperationType.h"
 #include "FlowManager.h"
-#include "IncomesFile.h"
-#include "OutcomesFile.h"
 #include "OperationsFile.h"
 #include "UserManager.h"
 

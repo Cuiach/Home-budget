@@ -35,17 +35,17 @@ int Operation::getOperationUserId()
     return operationUserId;
 }
 
-int Operation::getOperationDate()
+int Operation::getOperationDate() const
 {
     return operationDate;
 }
 
-string Operation::getOperationNameFromUser()
+string Operation::getOperationNameFromUser() const
 {
     return operationNameFromUser;
 }
 
-float Operation::getOperationAmount()
+float Operation::getOperationAmount() const
 {
     return operationAmount;
 }

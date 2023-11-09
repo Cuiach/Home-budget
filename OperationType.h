@@ -3,6 +3,6 @@
 
 #include <iostream>
 
-enum IOType {INCOME, OUTCOME};
+enum OperationType {INCOME, OUTCOME};
 
 #endif

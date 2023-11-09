@@ -43,7 +43,6 @@ string DateMethods::getCurrentYearMonthDayAsStringsWithDashes()
 
 bool DateMethods::checkDate(string &dateFromUser)
 {
-    string temporaryLetter = "";
     int year, month , day;
     int currentYear = getCurrentYearMonthDay()/10000;
     int currentMonth = (getCurrentYearMonthDay() - currentYear * 10000) /100;
@@ -102,4 +101,11 @@ int DateMethods::convertStringDateToInt(string date)
 {
     int dateCorrect = stoi(date.substr(0,4) + date.substr(5,2) + date.substr(8,2));
     return dateCorrect;
+}
+
+string DateMethods::convertIntDatetoStringWithDashes(int date)
+{
+    string rawDate = AdditionalMethods::convertIntToString(date);
+    string exactDate = rawDate.substr(0,4) + "-" + rawDate.substr(4,2) + "-" + rawDate.substr(6,2);
+    return exactDate;
 }

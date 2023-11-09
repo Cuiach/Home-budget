@@ -4,8 +4,8 @@ void FlowManager::addOutcome()
 {
     cout << " --- Dodajesz wydatek ---\n";
     Operation outcome = getOperationDetails();
-    IOType ioType = OUTCOME;
-    outcome.setOperationId(outcomesFile.getLastItemId() + 1);
+    OperationType ioType = OUTCOME;
+    outcome.setOperationId(outcomesFile.getLastId() + 1);
     outcomes.push_back(outcome);
     outcomesFile.addOperationToFile(outcome, ioType);
 }
@@ -14,8 +14,8 @@ void FlowManager::addIncome()
 {
     cout << " --- Dodajesz dochod ---\n";
     Operation income = getOperationDetails();
-    IOType ioType = INCOME;
-    income.setOperationId(incomesFile.getLastItemId() + 1);
+    OperationType ioType = INCOME;
+    income.setOperationId(incomesFile.getLastId() + 1);
     incomes.push_back(income);
     incomesFile.addOperationToFile(income, ioType);
 }
@@ -56,43 +56,67 @@ Operation FlowManager::getOperationDetails()
     return operation;
 }
 
-void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
+float FlowManager::calculateIncomesOutcomesBalance(int dateFrom, int dateTo, const OperationType & ioType)
 {
-    Operation temporaryOperation;
-    int dateSearched;
-    float incomesSum = 0;
-    float outcomesSum = 0;
+    vector <Operation> operations = ioType == INCOME ? incomes : outcomes;
+    float sum = 0;
+    string operationType = ioType == INCOME ? " Przychody" : " Wydatki";
 
-    for (size_t i = 0; i < incomes.size(); i++)
+    sort(operations.begin(), operations.end(), [](Operation &firstOperation, Operation &secondOperation)
+         { return firstOperation.getOperationDate() < secondOperation.getOperationDate(); } );
+
+    cout << operationType + " z podanego okresu:" << endl;
+
+    operationType = ioType == INCOME ? " Przychod" : " Wydatek";
+    for (const Operation &operation : operations)
     {
-        temporaryOperation = incomes[i];
-        dateSearched = temporaryOperation.getOperationDate();
-        if (dateSearched >= dateFrom && dateSearched <= dateTo)
+        if (operation.getOperationDate() >= dateFrom && operation.getOperationDate() <= dateTo)
         {
-            incomesSum = incomesSum + temporaryOperation.getOperationAmount();
-            cout << endl << temporaryOperation.getOperationId();
-            cout << endl << temporaryOperation.getOperationDate();
-            cout << endl << temporaryOperation.getOperationAmount();
-            cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
+            cout << operationType << ":" << endl;
+            cout << DateMethods::convertIntDatetoStringWithDashes(operation.getOperationDate()) << endl;
+            cout << operation.getOperationNameFromUser() << endl;
+            cout << operation.getOperationAmount() << endl;
+            sum = sum + operation.getOperationAmount();
         }
     }
-    cout << " Suma przychodow: " << incomesSum << endl;
-    system("pause");
+    return sum;
+}
 
-    for (size_t i = 0; i < outcomes.size(); i++)
-    {
-        temporaryOperation = outcomes[i];
-        dateSearched = temporaryOperation.getOperationDate();
-        if (dateSearched >= dateFrom && dateSearched <= dateTo)
-            {
-                outcomesSum = outcomesSum + temporaryOperation.getOperationAmount();
-                cout << endl << temporaryOperation.getOperationId();
-                cout << endl << temporaryOperation.getOperationDate();
-                cout << endl << temporaryOperation.getOperationAmount();
-                cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
-            }
-    }
-    cout << " Suma wydatkow: " << outcomesSum << endl << endl;
+void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
+{
+    float incomesSum = calculateIncomesOutcomesBalance(dateFrom, dateTo, INCOME);
+    float outcomesSum = calculateIncomesOutcomesBalance(dateFrom, dateTo, OUTCOME);
+
+//    for (size_t i = 0; i < incomes.size(); i++)
+//    {
+//        temporaryOperation = incomes[i];
+//        dateSearched = temporaryOperation.getOperationDate();
+//        if (dateSearched >= dateFrom && dateSearched <= dateTo)
+//        {
+//            incomesSum = incomesSum + temporaryOperation.getOperationAmount();
+//            cout << endl << temporaryOperation.getOperationId();
+//            cout << endl << temporaryOperation.getOperationDate();
+//            cout << endl << temporaryOperation.getOperationAmount();
+//            cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
+//        }
+//    }
+//    cout << " Suma przychodow: " << incomesSum << endl;
+//    system("pause");
+//
+//    for (size_t i = 0; i < outcomes.size(); i++)
+//    {
+//        temporaryOperation = outcomes[i];
+//        dateSearched = temporaryOperation.getOperationDate();
+//        if (dateSearched >= dateFrom && dateSearched <= dateTo)
+//            {
+//                outcomesSum = outcomesSum + temporaryOperation.getOperationAmount();
+//                cout << endl << temporaryOperation.getOperationId();
+//                cout << endl << temporaryOperation.getOperationDate();
+//                cout << endl << temporaryOperation.getOperationAmount();
+//                cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
+//            }
+//    }
+//    cout << " Suma wydatkow: " << outcomesSum << endl << endl;
     cout << " --------BILANS------- " << endl;
     cout << " Przychody: " << incomesSum << endl;
     cout << " Wydatki: " << outcomesSum << endl;
@@ -103,6 +127,7 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
 void FlowManager::printThisMonthInOut()
 {
     int dateFrom = 0;
+
     int dateTo = 0;
     int year = DateMethods::getCurrentYearMonthDay()/10000;
     int month = (DateMethods::getCurrentYearMonthDay() - year*10000) / 100;
@@ -159,7 +184,7 @@ void FlowManager::printChosenRangeInOut()
 
         ++excludeFirstOccurence;
 
-    } while (stoi(dateFrom) > stoi(dateTo));
+    } while (DateMethods::convertStringDateToInt(dateFrom) > DateMethods::convertStringDateToInt(dateTo));
 
-    printIncomesAndOutcomesOfRange(stoi(dateFrom), stoi(dateTo));
+    printIncomesAndOutcomesOfRange(DateMethods::convertStringDateToInt(dateFrom), DateMethods::convertStringDateToInt(dateTo));
 }

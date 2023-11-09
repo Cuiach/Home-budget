@@ -18,6 +18,7 @@ public:
     static int getCurrentYearMonthDay();
     static bool checkDate(string &dateFromUser);
     static int convertStringDateToInt(string date);
+    static string convertIntDatetoStringWithDashes(int date);
 };
 
 #endif

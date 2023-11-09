@@ -22,9 +22,9 @@ public:
 
     int getOperationId();
     int getOperationUserId();
-    int getOperationDate();
-    string getOperationNameFromUser();
-    float getOperationAmount();
+    int getOperationDate() const;
+    string getOperationNameFromUser() const;
+    float getOperationAmount() const;
 };
 
 #endif

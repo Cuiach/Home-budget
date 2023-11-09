@@ -4,21 +4,21 @@
 #include "AdditionalMethods.h"
 #include "DateMethods.h"
 #include "Operation.h"
-#include "IncomesFile.h"
-#include "OutcomesFile.h"
+#include "OperationsFile.h"
 
 using namespace std;
 
 class FlowManager
 {
-    IncomesFile incomesFile;
-    OutcomesFile outcomesFile;
+    OperationsFile incomesFile;
+    OperationsFile outcomesFile;
     const int ID_OF_LOGGED_USER;
     vector <Operation> incomes;
     vector <Operation> outcomes;
 
     void printIncomesAndOutcomesOfRange(int dateFrom, int dateTo);
     Operation getOperationDetails();
+    float calculateIncomesOutcomesBalance(int dateFrom, int dateTo, const OperationType &ioType);
 
 public:
     FlowManager (string incomesFileName, string outcomesFileName, int idOfLoggedUser)

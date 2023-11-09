@@ -15,13 +15,11 @@ using namespace std;
 
 class OperationsFile :public DataFile
 {
-    int lastItemId = 0;
-    string getOperationTypeName(IOType ioType);
+    string getOperationTypeName(OperationType ioType);
 public:
     OperationsFile(string fileName) : DataFile(fileName) {};
-    int getLastItemId();
-    void addOperationToFile(Operation operation, IOType ioType);
-    vector <Operation> readOperationsFromFile(int idOfLoggedUser, IOType ioType);
+    void addOperationToFile(Operation operation, OperationType ioType);
+    vector <Operation> readOperationsFromFile(int idOfLoggedUser, OperationType ioType);
 };
 
 #endif

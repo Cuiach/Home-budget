@@ -14,7 +14,6 @@ class AdditionalMethods
 
 public:
     static char readSign();
-//    static string changeFirstLetterCapitalNextSmall(string text);
     static string convertIntToString(int number);
     static string readLine();
     static string getNumber(string text, int signPosition);

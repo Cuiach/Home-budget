@@ -10,7 +10,16 @@ class DataFile
 {
     const string FILE_NAME;
 protected:
-    DataFile(string fileName) : FILE_NAME(fileName) {}
+    int lastId;
+
+    DataFile(string fileName) : FILE_NAME(fileName)
+    {
+        lastId = 0;
+    }
+
     string getFileName();
+
+public:
+    int getLastId();
 };
 #endif

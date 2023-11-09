@@ -1,9 +1,6 @@
 #include "OperationsFile.h"
 
-int OperationsFile::getLastItemId(){
-    return lastItemId;}
-
-string OperationsFile::getOperationTypeName(IOType ioType)
+string OperationsFile::getOperationTypeName(OperationType ioType)
 {
     string typeNameSingular;
     switch (ioType){
@@ -17,9 +14,9 @@ string OperationsFile::getOperationTypeName(IOType ioType)
     return typeNameSingular;
 }
 
-void OperationsFile::addOperationToFile(Operation operation, IOType ioType)
+void OperationsFile::addOperationToFile(Operation operation, OperationType ioType)
 {
-    operation.setOperationId(lastItemId+1);
+    operation.setOperationId(lastId+1);
 
     CMarkup xml;
 
@@ -43,10 +40,10 @@ void OperationsFile::addOperationToFile(Operation operation, IOType ioType)
     xml.AddElem(getOperationTypeName(ioType)+"Amount", to_string(operation.getOperationAmount()));
 
     xml.Save(getFileName());
-    ++lastItemId;
+    ++lastId;
 }
 
-vector <Operation> OperationsFile::readOperationsFromFile(int idOfLoggedUser, IOType ioType)
+vector <Operation> OperationsFile::readOperationsFromFile(int idOfLoggedUser, OperationType ioType)
 {
     vector <Operation> operations;
     Operation operation;
@@ -61,8 +58,8 @@ vector <Operation> OperationsFile::readOperationsFromFile(int idOfLoggedUser, IO
         {
             xml.IntoElem();
             xml.FindElem(getOperationTypeName(ioType)+"Id");
-            lastItemId = stoi(xml.GetElemContent());
-            operation.setOperationId(lastItemId);
+            lastId = stoi(xml.GetElemContent());
+            operation.setOperationId(lastId);
             xml.FindElem("userId");
 
             if (idOfLoggedUser == stoi(xml.GetElemContent()))
