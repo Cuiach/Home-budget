@@ -87,37 +87,7 @@ void FlowManager::printIncomesAndOutcomesOfRange(int dateFrom, int dateTo)
     float incomesSum = calculateIncomesOutcomesBalance(dateFrom, dateTo, INCOME);
     float outcomesSum = calculateIncomesOutcomesBalance(dateFrom, dateTo, OUTCOME);
 
-//    for (size_t i = 0; i < incomes.size(); i++)
-//    {
-//        temporaryOperation = incomes[i];
-//        dateSearched = temporaryOperation.getOperationDate();
-//        if (dateSearched >= dateFrom && dateSearched <= dateTo)
-//        {
-//            incomesSum = incomesSum + temporaryOperation.getOperationAmount();
-//            cout << endl << temporaryOperation.getOperationId();
-//            cout << endl << temporaryOperation.getOperationDate();
-//            cout << endl << temporaryOperation.getOperationAmount();
-//            cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
-//        }
-//    }
-//    cout << " Suma przychodow: " << incomesSum << endl;
-//    system("pause");
-//
-//    for (size_t i = 0; i < outcomes.size(); i++)
-//    {
-//        temporaryOperation = outcomes[i];
-//        dateSearched = temporaryOperation.getOperationDate();
-//        if (dateSearched >= dateFrom && dateSearched <= dateTo)
-//            {
-//                outcomesSum = outcomesSum + temporaryOperation.getOperationAmount();
-//                cout << endl << temporaryOperation.getOperationId();
-//                cout << endl << temporaryOperation.getOperationDate();
-//                cout << endl << temporaryOperation.getOperationAmount();
-//                cout << endl << temporaryOperation.getOperationNameFromUser() << endl;
-//            }
-//    }
-//    cout << " Suma wydatkow: " << outcomesSum << endl << endl;
-    cout << " --------BILANS------- " << endl;
+    cout << endl << " --------BILANS------- " << endl;
     cout << " Przychody: " << incomesSum << endl;
     cout << " Wydatki: " << outcomesSum << endl;
     cout << " Bilans: " << incomesSum - outcomesSum << endl;
@@ -140,22 +110,22 @@ void FlowManager::printThisMonthInOut()
 
 void FlowManager::printLastMonthInOut()
 {
-    int dateFrom = 0;
-    int dateTo = 0;
-    int year = DateMethods::getCurrentYearMonthDay() / 10000;
-    int month = (DateMethods::getCurrentYearMonthDay() - year * 10000) / 100;
-
-    if (month != 1)
-    {
-        month = month -1;
-        dateFrom = year*10000 + (month)*100 + 1;
-        dateTo = year*10000 + (month)*100 + DateMethods::getLastDayOfMonth(year, month);
-    }
-    else
-    {
-      dateFrom = (year-1)*10000 + 1201;
-      dateFrom = (year-1)*10000 + 1231;
-    }
+    int dateFrom = stoi(DateMethods::getLastMonthFirstAndLastDayDates().substr(0,8));
+    int dateTo = stoi(DateMethods::getLastMonthFirstAndLastDayDates().substr(8,8));
+//    int year = DateMethods::getCurrentYearMonthDay() / 10000;
+//    int month = (DateMethods::getCurrentYearMonthDay() - year * 10000) / 100;
+//
+//    if (month != 1)
+//    {
+//        month = month -1;
+//        dateFrom = year*10000 + (month)*100 + 1;
+//        dateTo = year*10000 + (month)*100 + DateMethods::getLastDayOfMonth(year, month);
+//    }
+//    else
+//    {
+//      dateFrom = (year-1)*10000 + 1201;
+//      dateFrom = (year-1)*10000 + 1231;
+//    }
 
     printIncomesAndOutcomesOfRange(dateFrom, dateTo);
 }

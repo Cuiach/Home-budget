@@ -109,3 +109,25 @@ string DateMethods::convertIntDatetoStringWithDashes(int date)
     string exactDate = rawDate.substr(0,4) + "-" + rawDate.substr(4,2) + "-" + rawDate.substr(6,2);
     return exactDate;
 }
+
+string DateMethods::getLastMonthFirstAndLastDayDates()
+{
+    int dateFrom = 0;
+    int dateTo = 0;
+    int year = DateMethods::getCurrentYearMonthDay() / 10000;
+    int month = (DateMethods::getCurrentYearMonthDay() - year * 10000) / 100;
+
+    if (month != 1)
+    {
+        month = month -1;
+        dateFrom = year*10000 + (month)*100 + 1;
+        dateTo = year*10000 + (month)*100 + DateMethods::getLastDayOfMonth(year, month);
+    }
+    else
+    {
+      dateFrom = (year-1)*10000 + 1201;
+      dateFrom = (year-1)*10000 + 1231;
+    }
+
+    return AdditionalMethods::convertIntToString(dateFrom) + AdditionalMethods::convertIntToString(dateTo);
+}
