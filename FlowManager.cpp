@@ -25,6 +25,7 @@ Operation FlowManager::getOperationDetails()
     Operation operation;
     int checkFirstOccurence = 0;
     float amountToCheck = 0;
+    string dateFromUser = "";
 
     operation.setOperationuUserId(ID_OF_LOGGED_USER);
 
@@ -41,7 +42,13 @@ Operation FlowManager::getOperationDetails()
 
     operation.setOperationAmount(amountToCheck);
 
-    operation.setOperationDate(DateMethods::getDateAndConvertToInt());
+    do
+    {
+        cout << " Wprowadz date w formacie rrrr-mm-dd. Wprowadz t, jesli chcesz wpisac dzisiejsza date: ";
+        dateFromUser = AdditionalMethods::readLine();
+    } while (!DateMethods::checkDate(dateFromUser));
+
+    operation.setOperationDate(DateMethods::convertStringDateToInt(dateFromUser));
 
     cout << " Rodzaj/nazwa/typ: ";
     operation.setOperationNameFromUser(AdditionalMethods::readLine());
@@ -130,8 +137,8 @@ void FlowManager::printLastMonthInOut()
 
 void FlowManager::printChosenRangeInOut()
 {
-    int dateFrom = 0;
-    int dateTo = 0;
+    string dateFrom = "";
+    string dateTo = "";
     int excludeFirstOccurence = 0;
 
     do {
@@ -140,14 +147,19 @@ void FlowManager::printChosenRangeInOut()
             cout << endl << " Data konca musi byc po dacie poczatku. Sprobuj jeszcze raz";
         }
 
-        cout << endl << " Wpisz date poczatku obliczenia bilansu: ";
-        dateFrom = DateMethods::getDateAndConvertToInt();
-        cout << endl << " Wpisz date konca obliczenia bilansu: ";
-        dateTo = DateMethods::getDateAndConvertToInt();
+        do {
+            cout << endl << " Wpisz date poczatku obliczenia bilansu: ";
+            dateFrom = AdditionalMethods::readLine();
+        } while (!DateMethods::checkDate(dateFrom));
+
+        do {
+            cout << endl << " Wpisz date konca obliczenia bilansu: ";
+            dateTo = AdditionalMethods::readLine();
+        } while (!DateMethods::checkDate(dateTo));
 
         ++excludeFirstOccurence;
 
-    } while (dateFrom > dateTo);
+    } while (stoi(dateFrom) > stoi(dateTo));
 
-    printIncomesAndOutcomesOfRange(dateFrom, dateTo);
+    printIncomesAndOutcomesOfRange(stoi(dateFrom), stoi(dateTo));
 }

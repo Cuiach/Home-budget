@@ -48,6 +48,7 @@ string AdditionalMethods::convertIntToString(int number)
 string AdditionalMethods::readLine()
 {
     string input = "";
+    cin.sync();
     getline(cin, input);
     return input;
 }
@@ -67,49 +68,49 @@ float AdditionalMethods::convertStringToFloatExcludingZero(string text)
 {
     float number = 0;
     int secondPartLength = 0;
+    int placeForCommaOrDot;
     string firstPartOfNumber = getNumber(text, 0);
 
     if (firstPartOfNumber == text)
-        return convertStringToInt(firstPartOfNumber);
+    {
+        return stoi(firstPartOfNumber);
+    }
 
-    int a = firstPartOfNumber.length();
-    if (!(text[a] == ',' || text[a] == '.'))
+    placeForCommaOrDot = firstPartOfNumber.length();
+
+    if (!(text[placeForCommaOrDot] == ',' || text[placeForCommaOrDot] == '.'))
+    {
         return -1;
+    }
 
     string secondPartOfNumber = getNumber(text, firstPartOfNumber.length()+1);
 
     if (!((firstPartOfNumber.length() + secondPartOfNumber.length() + 1) == text.length()))
+    {
         return -1;
+    }
 
-    number = convertStringToInt(firstPartOfNumber);
+    number = stoi(firstPartOfNumber);
     secondPartLength = secondPartOfNumber.length();
-    int secondPart = convertStringToInt(secondPartOfNumber);
+    int secondPart = stoi(secondPartOfNumber);
     number = number + (secondPart/(pow(10,secondPartLength)));
 
     if (number == 0)
+    {
         return -1;
+    }
 
     return number;
 }
 
-
-int AdditionalMethods::convertStringToInt(string number)
-{
-    int numberInt;
-    istringstream iss(number);
-    iss >> numberInt;
-
-    return numberInt;
-}
-
-string AdditionalMethods::changeFirstLetterCapitalNextSmall(string text)
-{
-    if (!text.empty())
-    {
-        transform(text.begin(), text.end(), text.begin(), ::tolower);
-        text[0] = toupper(text[0]);
-    }
-    return text;
-}
-
-
+//string AdditionalMethods::changeFirstLetterCapitalNextSmall(string text)
+//{
+//    if (!text.empty())
+//    {
+//        transform(text.begin(), text.end(), text.begin(), ::tolower);
+//        text[0] = toupper(text[0]);
+//    }
+//    return text;
+//}
+//
+//

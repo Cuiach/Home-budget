@@ -61,15 +61,15 @@ vector <Operation> OperationsFile::readOperationsFromFile(int idOfLoggedUser, IO
         {
             xml.IntoElem();
             xml.FindElem(getOperationTypeName(ioType)+"Id");
-            lastItemId = AdditionalMethods::convertStringToInt(xml.GetElemContent());
+            lastItemId = stoi(xml.GetElemContent());
             operation.setOperationId(lastItemId);
             xml.FindElem("userId");
 
-            if (idOfLoggedUser == AdditionalMethods::convertStringToInt(xml.GetElemContent()))
+            if (idOfLoggedUser == stoi(xml.GetElemContent()))
             {
                 operation.setOperationuUserId(idOfLoggedUser);
                 xml.FindElem(getOperationTypeName(ioType)+"Date");
-                operation.setOperationDate(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
+                operation.setOperationDate(stoi(xml.GetElemContent()));
                 xml.FindElem(getOperationTypeName(ioType)+"Item");
                 operation.setOperationNameFromUser(xml.GetElemContent());
                 xml.FindElem(getOperationTypeName(ioType)+"Amount");

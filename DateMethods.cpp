@@ -34,52 +34,72 @@ int DateMethods::getCurrentYearMonthDay()
     return year*10000 + month*100 + day;
 }
 
-int DateMethods::checkAndReturnDate(string dateFromUser)
+string DateMethods::getCurrentYearMonthDayAsStringsWithDashes()
+{
+    string rawDate = AdditionalMethods::convertIntToString(getCurrentYearMonthDay());
+    string dateWithDashes = rawDate.substr(0,4) + "-" + rawDate.substr(4,2) + "-" + rawDate.substr(6,2);
+    return dateWithDashes;
+}
+
+bool DateMethods::checkDate(string &dateFromUser)
 {
     string temporaryLetter = "";
     int year, month , day;
     int currentYear = getCurrentYearMonthDay()/10000;
     int currentMonth = (getCurrentYearMonthDay() - currentYear * 10000) /100;
     int currentDay = (getCurrentYearMonthDay() - currentYear * 10000 - currentMonth * 100);
-    system("pause");
 
-    if (dateFromUser.length() != 10) return 0;
+    if (dateFromUser == "t" || dateFromUser == "T")
+    {
+        dateFromUser = getCurrentYearMonthDayAsStringsWithDashes();
+        return true;
+    }
 
-    year = AdditionalMethods::convertStringToInt(AdditionalMethods::getNumber(dateFromUser, 0));
-    if (year < 2000 || year > currentYear) return 0;
+    if (dateFromUser.length() != 10)
+    {
+        cout << " Niepoprawny format daty. Sprobuj jeszcze raz! \n";
+        return false;
+    }
 
-    month = AdditionalMethods::convertStringToInt(AdditionalMethods::getNumber(dateFromUser, 5));
-    if ((currentYear == year && (month < 1 || month > currentMonth)) || (currentYear != year && (month < 1 || month > 12))) return 0;
+    if (!regex_match(dateFromUser, regex("[0-9]{4}-[0-9]{2}-[0-9]{2}")))
+    {
+        return false;
+    }
 
-    day = AdditionalMethods::convertStringToInt(AdditionalMethods::getNumber(dateFromUser,8));
-    if (((currentYear == year && currentMonth == month) && (day < 1 || day > currentDay))
-    ||  ((!(currentYear == year && currentMonth == month)) && (day < 1 || day > getLastDayOfMonth(year, month)))) return 0;
+    try
+    {
+        year = stoi(dateFromUser.substr(0,4));
+        month = stoi(dateFromUser.substr(5,2));
+        day = stoi(dateFromUser.substr(8,2));
+    }
+    catch (const exception &e)
+    {
+        cout << " Wystapil wyjatek: " << e.what() <<endl;
+        return false;
+    }
 
-    temporaryLetter = dateFromUser[4];
-    if (temporaryLetter != "-") return 0;
+    if (year < 2000 || year > currentYear)
+    {
+        cout << " Niepoprawny rok. Sprobuj jeszcze raz! \n" << endl;
+        return false;
+    }
 
-    temporaryLetter = dateFromUser[7];
-    if (temporaryLetter != "-") return 0;
+    if (month < 1 || month > 12 || (currentYear == year && month > currentMonth))
+    {
+        cout << " Niepoprawny miesiac. Sprobuj jeszcze raz! \n" << endl;
+        return false;
+    }
 
-    return 10000*year + 100*month + day;
+    if (day < 1 || day > getLastDayOfMonth(year, month) || (currentYear == year && currentMonth == month && day > currentDay))
+    {
+        cout << " Niepoprawny dzien. Sprobuj jeszcze raz! \n" << endl;
+        return false;
+    }
+    return true;
 }
 
-int DateMethods::getDateAndConvertToInt()
+int DateMethods::convertStringDateToInt(string date)
 {
-    int dateFromUser = 0;
-    string checkIfDash1 = "";
-    string checkIfDash2 = "";
-    int checkFisrtOccurence = 0;
-
-    while (dateFromUser == 0)
-    {
-        if (checkFisrtOccurence != 0)
-        {
-            cout << " Blednie podana data. Sprobuj jeszcze raz! \n";
-        }
-        cout << " Wprowadz date w formacie rrrr-mm-dd: ";
-        dateFromUser = checkAndReturnDate(AdditionalMethods::readLine());
-        ++checkFisrtOccurence;
-    }
-    return dateFromUser;
+    int dateCorrect = stoi(date.substr(0,4) + date.substr(5,2) + date.substr(8,2));
+    return dateCorrect;
 }

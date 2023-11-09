@@ -46,7 +46,7 @@ vector <User> UsersFile::readUsersFromFile()
         {
             xml.IntoElem();
             xml.FindElem("ID");
-            user.setId(AdditionalMethods::convertStringToInt(xml.GetElemContent()));
+            user.setId(stoi(xml.GetElemContent()));
             xml.FindElem("login");
             user.setLogin(xml.GetElemContent());
             xml.FindElem("password");
