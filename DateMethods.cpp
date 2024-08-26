@@ -62,6 +62,7 @@ bool DateMethods::checkDate(string &dateFromUser)
 
     if (!regex_match(dateFromUser, regex("[0-9]{4}-[0-9]{2}-[0-9]{2}")))
     {
+        cout << " Niepoprawny format daty. Sprobuj jeszcze raz! \n";
         return false;
     }
 
@@ -99,15 +100,13 @@ bool DateMethods::checkDate(string &dateFromUser)
 
 int DateMethods::convertStringDateToInt(string date)
 {
-    int dateCorrect = stoi(date.substr(0,4) + date.substr(5,2) + date.substr(8,2));
-    return dateCorrect;
+    return stoi(date.substr(0,4) + date.substr(5,2) + date.substr(8,2));
 }
 
 string DateMethods::convertIntDatetoStringWithDashes(int date)
 {
     string rawDate = AdditionalMethods::convertIntToString(date);
-    string exactDate = rawDate.substr(0,4) + "-" + rawDate.substr(4,2) + "-" + rawDate.substr(6,2);
-    return exactDate;
+    return rawDate.substr(0,4) + "-" + rawDate.substr(4,2) + "-" + rawDate.substr(6,2);
 }
 
 string DateMethods::getLastMonthFirstAndLastDayDates()
